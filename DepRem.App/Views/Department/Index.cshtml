@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DepartmentListDTO>
+
+<h5 class="mb-4">Departments</h5>
+
+<div>
+    <div class="mb-3 text-end">
+        <a class="btn btn-primary btn-sm px-3 fw-bold" asp-action="Create">Create New Department</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Logo</th>
+                <th>Name</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var number = 1;
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@number</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.Logo))
+                        {
+                            <img src="data:image/png;base64,@item.Logo" alt="Logo" style="width:40px;height:40px;" />
+                        }
+                        else
+                        {
+                            <span>No Logo</span>
+                        }
+                    </td>
+                    <td>@item.Name</td>
+                    <td class="text-center">
+                        <a class="btn btn-info btn-sm px-2 fw-bold" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    </td>
+                </tr>
+                number++;
+            }
+        </tbody>
+    </table>
+</div>

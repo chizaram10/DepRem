@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ReminderListDTO>
+
+<h5 class="mb-4">Reminders</h5>
+
+<div>
+    <div class="mb-3 text-end">
+        <a class="btn btn-primary btn-sm px-3 fw-bold" asp-action="Create">Create New Reminder</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var number = 1;
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@number</td>
+                    <td>@item.Title</td>
+                    <td>@item.DateTimeForExecution.ToString("dd/MM/yyyy")</td>
+                    <td>@TimeOnly.FromDateTime(item.DateTimeForExecution.Date)</td>
+                </tr>
+                number++;
+            }
+
+        </tbody>
+    </table>
+</div>

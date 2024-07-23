@@ -1,0 +1,73 @@
+﻿@model DepartmentDTO
+
+<h5 class="mb-5">Department Details</h5>
+
+<div>
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="row mb-3">
+                <div class="text-end">
+                    @if (!string.IsNullOrEmpty(Model.Logo))
+                    {
+                        <img src="data:image/png;base64,@Model.Logo" alt="Logo" class="img-fluid" style="max-width: 150px; height: auto;" />
+                    }
+                    else
+                    {
+                        <span>No Logo Available</span>
+                    }
+                </div>
+            </div>
+            <div></div>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">Name:</dt>
+                <dd class="col-sm-9">@Model.Name</dd>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h6>Parent Departments in Hierarchical Order</h6>
+            <ul class="list-group">
+                @if (Model.ParentDepartments.Any())
+                {
+                    @foreach (var parent in Model.ParentDepartments)
+                    {
+                        <li class="list-group-item">@parent</li>
+                    }
+                }
+                else
+                {
+                    <li class="list-group-item">No parent departments.</li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h6>Sub-Departments</h6>
+            <ul class="list-group">
+                @if (Model.SubDepartments.Any())
+                {
+                    @foreach (var sub in Model.SubDepartments)
+                    {
+                        <li class="list-group-item">@sub</li>
+                    }
+                }
+                else
+                {
+                    <li class="list-group-item">No sub-departments.</li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+﻿@model DepartmentViewModel
+
+<h4 class="mb-5">Create Department</h4>
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Department.Name" class="fw-bold">Name</label>
+                <input asp-for="Department.Name" class="form-control" />
+                <span asp-validation-for="Department.Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Department.LogoFile" class="fw-bold">Logo</label>
+                <input type="file" asp-for="Department.LogoFile" class="form-control" accept="image/*" />
+                <span asp-validation-for="Department.LogoFile" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Department.ParentDepartmentId" class="fw-bold">Parent Department</label>
+                <select asp-for="Department.ParentDepartmentId" class="form-control">
+                    <option value="">Select Parent Department</option>
+                    @foreach (var dept in Model.ParentDepartments)
+                    {
+                        <option value="@dept.Id">@dept.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Department.ParentDepartmentId" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group mt-5">
+        <button type="submit" class="btn btn-primary px-4 p-2 fw-bold">Save</button>
+    </div>
+</form>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="text-end">
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
